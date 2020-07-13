@@ -17,7 +17,8 @@ namespace BusinessLayer.Services
 
         public enum ExceptionType
         {
-            InvalidData
+            InvalidData,
+            InvalidValue
         }
 
         public ExceptionType Type { get; set; }

@@ -55,6 +55,7 @@ namespace BusinessLayer.Services
         {
             Length length = new Length();
             Weight weight = new Weight();
+            Volume volume = new Volume();
             try
             {
                 if (MeasurementType == "length")
@@ -73,6 +74,14 @@ namespace BusinessLayer.Services
                     if (unit.Equals(Weight.Unit.GramsToKilogram) || unit.Equals(Weight.Unit.TonneToKilograms))
                     {
                         return weight.ConvertWeigths(unit, value);
+                    }
+                }
+                else if (MeasurementType == "volume")
+                {
+                    Volume.Unit unit = volume.SetUnitAndConvertVolume(conversionType);
+                    if (unit.Equals(Volume.Unit.GallonToLitre) || unit.Equals(Volume.Unit.MiliLitreToLitre))
+                    {
+                        return volume.ConvertVolumes(unit, value);
                     }
                 }
                 return 0;
