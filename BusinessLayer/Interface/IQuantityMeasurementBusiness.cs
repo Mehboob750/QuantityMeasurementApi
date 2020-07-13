@@ -8,5 +8,7 @@ namespace BusinessLayer.Interface
     public interface IQuantityMeasurementBusiness
     {
         Quantity Convert(Quantity quantity);
+
+        IEnumerable<Quantity> GetAllQuantity();
     }
 }

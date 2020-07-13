@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using BusinessLayer.Interface;
 using CommanLayer.Model;
 using RepositoryLayer.Interface;
@@ -26,7 +25,6 @@ namespace BusinessLayer.Services
                 {
                     return quantityMeasurementRepository.Add(quantity);
                 }
-
                 return quantity;
             }
             catch (Exception e)
@@ -35,11 +33,23 @@ namespace BusinessLayer.Services
             }
 
         }
+
+        public IEnumerable<Quantity> GetAllQuantity()
+        {
+            try
+            {
+                return quantityMeasurementRepository.GetAllQuantity();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         private double UnitConversion(Quantity quantity)
         {
             try
             {
-
                 string MeasurementType = quantity.MeasurementType;
                 string conversionType = quantity.ConversionType;
                 double value = quantity.Value;
@@ -53,13 +63,11 @@ namespace BusinessLayer.Services
 
         private double Conversion(string MeasurementType, string conversionType, double value)
         {
-            Length length = new Length();
-            Weight weight = new Weight();
-            Volume volume = new Volume();
             try
             {
                 if (MeasurementType == "length")
                 {
+                    Length length = new Length();
                     Length.Unit unit = length.SetUnitAndConvertLength(conversionType);
 
                     if (unit == Length.Unit.FeetToInch || unit == Length.Unit.YardToInch || unit == Length.Unit.CentimeterToInch)
@@ -69,6 +77,7 @@ namespace BusinessLayer.Services
                 }
                 else if (MeasurementType == "weight")
                 {
+                    Weight weight = new Weight();
                     Weight.Unit unit = weight.SetUnitAndConvertWeights(conversionType);
 
                     if (unit.Equals(Weight.Unit.GramsToKilogram) || unit.Equals(Weight.Unit.TonneToKilograms))
@@ -78,12 +87,23 @@ namespace BusinessLayer.Services
                 }
                 else if (MeasurementType == "volume")
                 {
+                    Volume volume = new Volume();
                     Volume.Unit unit = volume.SetUnitAndConvertVolume(conversionType);
                     if (unit.Equals(Volume.Unit.GallonToLitre) || unit.Equals(Volume.Unit.MiliLitreToLitre))
                     {
-                        return volume.ConvertVolumes(unit, value);
+                        return volume.ConvertValueToLitre(unit, value);
                     }
                 }
+                else if (MeasurementType == "temperature")
+                {
+                    Temperature temperature = new Temperature();
+                    Temperature.Unit unit = temperature.SetUnitAndConvertTemperature(conversionType);
+                    if (unit.Equals(Temperature.Unit.FahrenheitToCelsius))
+                    {
+                        return temperature.ConvertTemperature(unit, value);
+                    }
+                }
+
                 return 0;
             }
             catch (Exception e)

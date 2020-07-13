@@ -26,7 +26,7 @@ namespace QuantityMeasurementApi.Controllers
             try
             {
                 var result = quantityMeasurementBusiness.Convert(quantity);
-                if (!result.Equals(null))
+                if (!result.Result.Equals(0))
                 {
                     bool success = true;
                     var message = "Data Added Sucessfully";
@@ -45,6 +45,33 @@ namespace QuantityMeasurementApi.Controllers
                 return BadRequest(new { success, message = e.Message });
             }
         }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Quantity>> GetAllQuantity()
+        {
+            try
+            {
+                var result = quantityMeasurementBusiness.GetAllQuantity();
+                if (!result.Equals(null))
+                {
+                    bool success = true;
+                    var message = "Data is Extacted Sucessfully";
+                    return this.Ok(new { success, message, data = result });
+                }
+                else
+                {
+                    bool success = false;
+                    var message = "Sorry, Not able to Extract Data";
+                    return this.NotFound(new { success, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
+            }
+        }
+
 
     }
 }

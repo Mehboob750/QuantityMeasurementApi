@@ -29,5 +29,17 @@ namespace RepositoryLayer.Services
                 throw new Exception(e.Message);
             }
         }
+
+        public IEnumerable<Quantity> GetAllQuantity()
+        {
+            try
+            {
+                return dBContext.Quantities;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

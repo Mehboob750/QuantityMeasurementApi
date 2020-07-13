@@ -22,7 +22,6 @@ namespace BusinessLayer.Services
             {
                 return Unit.GramsToKilogram;
             }
-
             else if (conversionType == "TonneToKilograms")
             {
                 return Unit.TonneToKilograms;

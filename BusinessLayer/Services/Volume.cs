@@ -18,14 +18,14 @@ namespace BusinessLayer.Services
             MiliLitreToLitre
         }
 
-        public Unit SetUnitAndConvertVolume(string operation)
+        public Unit SetUnitAndConvertVolume(string conversionType)
         {
-            if (operation == "GallonToLitre")
+            if (conversionType == "GallonToLitre")
             {
                 return Unit.GallonToLitre;
             }
 
-            if (operation == "MiliLitreToLitre")
+            if (conversionType == "MiliLitreToLitre")
             {
                 return Unit.MiliLitreToLitre;
             }
