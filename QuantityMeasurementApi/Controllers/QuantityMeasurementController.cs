@@ -55,13 +55,13 @@ namespace QuantityMeasurementApi.Controllers
                 if (!result.Equals(null))
                 {
                     bool success = true;
-                    var message = "Data is Extacted Sucessfully";
+                    var message = "Data Read Successfully";
                     return this.Ok(new { success, message, data = result });
                 }
                 else
                 {
                     bool success = false;
-                    var message = "Sorry, Not able to Extract Data";
+                    var message = "Unable To Read Data";
                     return this.NotFound(new { success, message, data = result });
                 }
             }
@@ -72,6 +72,30 @@ namespace QuantityMeasurementApi.Controllers
             }
         }
 
-
+        [HttpGet("{Id}")]
+        public IActionResult GetQuantityById(int Id)
+        {
+            try
+            {
+                var result = quantityMeasurementBusiness.GetQuantityById(Id);
+                if (result.Equals(null))
+                {
+                    bool success = true;
+                    var message = "Data Found Successfully";
+                    return this.Ok(new { success, message, Data = result });
+                }
+                else
+                {
+                    bool success = false;
+                    var message = "Data Not Found";
+                    return this.Ok(new { success, message, Data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
+            }
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace BusinessLayer.Interface
         Quantity Convert(Quantity quantity);
 
         IEnumerable<Quantity> GetAllQuantity();
+
+        Quantity GetQuantityById(int Id);
     }
 }

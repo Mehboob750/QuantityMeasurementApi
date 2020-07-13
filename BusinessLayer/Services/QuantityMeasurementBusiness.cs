@@ -46,6 +46,18 @@ namespace BusinessLayer.Services
             }
         }
 
+        public Quantity GetQuantityById(int Id)
+        {
+            try
+            {
+                return quantityMeasurementRepository.GetQuantityById(Id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         private double UnitConversion(Quantity quantity)
         {
             try

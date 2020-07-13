@@ -41,5 +41,18 @@ namespace RepositoryLayer.Services
                 throw new Exception(e.Message);
             }
         }
+
+        public Quantity GetQuantityById(int Id)
+        {
+            try
+            {
+                Quantity quantity = dBContext.Quantities.Find(Id);
+                return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

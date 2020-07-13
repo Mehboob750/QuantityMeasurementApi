@@ -8,7 +8,9 @@ namespace RepositoryLayer.Interface
     public interface IQuantityMeasurementRepository
     {
         Quantity Add(Quantity quantity);
+
         IEnumerable<Quantity> GetAllQuantity();
 
+        Quantity GetQuantityById(int Id);
     }
 }
