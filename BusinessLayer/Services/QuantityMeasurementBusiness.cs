@@ -54,18 +54,34 @@ namespace BusinessLayer.Services
         private double Conversion(string MeasurementType, string conversionType, double value)
         {
             Length length = new Length();
-           
-            if (MeasurementType == "length")
+            Weight weight = new Weight();
+            try
             {
-                Length.Unit unit = length.SetUnitAndConvertLength(conversionType);
-
-                if (unit == Length.Unit.FeetToInch || unit == Length.Unit.YardToInch || unit == Length.Unit.CentimeterToInch)
+                if (MeasurementType == "length")
                 {
-                    return length.ConvertLength(unit, value);
+                    Length.Unit unit = length.SetUnitAndConvertLength(conversionType);
+
+                    if (unit == Length.Unit.FeetToInch || unit == Length.Unit.YardToInch || unit == Length.Unit.CentimeterToInch)
+                    {
+                        return length.ConvertLength(unit, value);
+                    }
                 }
+                else if (MeasurementType == "weight")
+                {
+                    Weight.Unit unit = weight.SetUnitAndConvertWeights(conversionType);
+
+                    if (unit.Equals(Weight.Unit.GramsToKilogram) || unit.Equals(Weight.Unit.TonneToKilograms))
+                    {
+                        return weight.ConvertWeigths(unit, value);
+                    }
+                }
+                return 0;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
 
-            return value;
         }
 
     }
