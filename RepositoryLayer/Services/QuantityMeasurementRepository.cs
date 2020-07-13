@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CommanLayer;
 using CommanLayer.Model;
@@ -54,5 +55,25 @@ namespace RepositoryLayer.Services
                 throw new Exception(e.Message);
             }
         }
+
+        public IEnumerable<Quantity> DeleteQuntityById(int Id)
+        {
+            try
+            {
+                List<Quantity> quantity = dBContext.Quantities.ToList();
+
+                if (quantity != null)
+                {
+                    dBContext.Remove(dBContext.Quantities.Single(a => a.Id == Id));
+                    dBContext.SaveChanges();
+                }
+                return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }

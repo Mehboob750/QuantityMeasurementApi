@@ -97,5 +97,31 @@ namespace QuantityMeasurementApi.Controllers
                 return BadRequest(new { success, message = e.Message });
             }
         }
+
+        [HttpDelete("{Id}")]
+        public IActionResult DeleteQuntityById(int Id)
+        {
+            try
+            {
+                var result = quantityMeasurementBusiness.DeleteQuntityById(Id);
+                if (!result.Equals(null))
+                {
+                    bool success = true;
+                    var message = "Data Deleted Successfully";
+                    return this.Ok(new { success, message, data = result });
+                }
+                else
+                {
+                    bool success = false;
+                    var message = "Failed To Delete Data";
+                    return this.Ok(new { success, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
+            }
+        }
     }
 }

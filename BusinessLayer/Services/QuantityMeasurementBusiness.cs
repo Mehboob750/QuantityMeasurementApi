@@ -58,6 +58,18 @@ namespace BusinessLayer.Services
             }
         }
 
+        public IEnumerable<Quantity> DeleteQuntityById(int Id)
+        {
+            try
+            {
+                return quantityMeasurementRepository.DeleteQuntityById(Id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         private double UnitConversion(Quantity quantity)
         {
             try

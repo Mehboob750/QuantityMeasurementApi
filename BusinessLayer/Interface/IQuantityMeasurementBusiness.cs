@@ -12,5 +12,7 @@ namespace BusinessLayer.Interface
         IEnumerable<Quantity> GetAllQuantity();
 
         Quantity GetQuantityById(int Id);
+
+        IEnumerable<Quantity> DeleteQuntityById(int Id);
     }
 }
