@@ -16,5 +16,7 @@ namespace RepositoryLayer.Interface
         Quantity DeleteQuntityById(int Id);
 
         Compare AddComparedValue(Compare compare);
+
+        IEnumerable<Compare> GetAllComparison();
     }
 }

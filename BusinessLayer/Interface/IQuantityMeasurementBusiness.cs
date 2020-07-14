@@ -17,5 +17,7 @@ namespace BusinessLayer.Interface
 
         Compare CompareAndAdd(Compare compare);
 
+        IEnumerable<Compare> GetAllComparison();
+
     }
 }

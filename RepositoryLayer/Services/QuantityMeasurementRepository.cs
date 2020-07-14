@@ -92,5 +92,16 @@ namespace RepositoryLayer.Services
             }
         }
 
+        public IEnumerable<Compare> GetAllComparison()
+        {
+            try
+            {
+                return dBContext.Comparisons;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

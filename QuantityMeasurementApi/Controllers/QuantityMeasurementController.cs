@@ -150,5 +150,32 @@ namespace QuantityMeasurementApi.Controllers
                 return BadRequest(new { success, message = e.Message });
             }
         }
+
+        [HttpGet]
+        [Route("compare")]
+        public ActionResult<IEnumerable<Quantity>> GetAllComparison()
+        {
+            try
+            {
+                var result = quantityMeasurementBusiness.GetAllComparison();
+                if (!result.Equals(null))
+                {
+                    bool success = true;
+                    var message = "Data Read Successfully";
+                    return this.Ok(new { success, message, data = result });
+                }
+                else
+                {
+                    bool success = false;
+                    var message = "Unable To Read Data";
+                    return this.NotFound(new { success, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
+            }
+        }
     }
 }

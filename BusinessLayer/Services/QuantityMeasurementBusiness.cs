@@ -88,6 +88,18 @@ namespace BusinessLayer.Services
             }
         }
 
+        public IEnumerable<Compare> GetAllComparison()
+        {
+            try
+            {
+                return quantityMeasurementRepository.GetAllComparison();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         private string UnitComparision(Compare compare)
         {
             try
@@ -195,6 +207,8 @@ namespace BusinessLayer.Services
             }
 
         }
+
+  
 
     }
 }
