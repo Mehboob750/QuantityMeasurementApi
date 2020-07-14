@@ -205,5 +205,32 @@ namespace QuantityMeasurementApi.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("compare/{Id}")]
+        public IActionResult DeleteComparisonById(int Id)
+        {
+            try
+            {
+                var result = quantityMeasurementBusiness.DeleteComparisonById(Id);
+                if (!result.Equals(null))
+                {
+                    bool success = true;
+                    var message = "Data Deleted Successfully";
+                    return this.Ok(new { success, message, data = result });
+                }
+                else
+                {
+                    bool success = false;
+                    var message = "Failed To Delete Data";
+                    return this.BadRequest(new { success, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
+            }
+        }
+
     }
 }

@@ -21,5 +21,7 @@ namespace BusinessLayer.Interface
 
         Compare GetComparisonById(int Id);
 
+        Compare DeleteComparisonById(int Id);
+
     }
 }

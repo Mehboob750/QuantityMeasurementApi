@@ -82,7 +82,6 @@ namespace RepositoryLayer.Services
             try
             {
                 dBContext.Comparisons.Add(compare);
-
                 dBContext.SaveChanges();
                 return compare;
             }
@@ -115,5 +114,24 @@ namespace RepositoryLayer.Services
                 throw new Exception(e.Message);
             }
         }
+
+        public Compare DeleteComparisonById(int Id)
+        {
+            try
+            {
+                Compare compare = dBContext.Comparisons.FirstOrDefault(value => value.Id == Id);
+                if (compare != null)
+                {
+                    dBContext.Comparisons.Remove(compare);
+                    dBContext.SaveChanges();
+                }
+                return compare;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }

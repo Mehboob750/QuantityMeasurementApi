@@ -20,5 +20,7 @@ namespace RepositoryLayer.Interface
         IEnumerable<Compare> GetAllComparison();
 
         Compare GetComparisonById(int Id);
+
+        Compare DeleteComparisonById(int Id);
     }
 }

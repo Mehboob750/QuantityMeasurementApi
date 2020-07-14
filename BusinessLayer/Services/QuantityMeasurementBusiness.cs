@@ -112,6 +112,18 @@ namespace BusinessLayer.Services
             }
         }
 
+        public Compare DeleteComparisonById(int Id)
+        {
+            try
+            {
+                return quantityMeasurementRepository.DeleteComparisonById(Id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         private string UnitComparision(Compare compare)
         {
             try
