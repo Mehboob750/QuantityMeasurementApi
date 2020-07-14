@@ -13,6 +13,6 @@ namespace RepositoryLayer.Interface
 
         Quantity GetQuantityById(int Id);
 
-        IEnumerable<Quantity> DeleteQuntityById(int Id);
+        Quantity DeleteQuntityById(int Id);
     }
 }

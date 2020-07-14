@@ -58,7 +58,7 @@ namespace BusinessLayer.Services
             }
         }
 
-        public IEnumerable<Quantity> DeleteQuntityById(int Id)
+        public Quantity DeleteQuntityById(int Id)
         {
             try
             {

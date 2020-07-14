@@ -47,8 +47,7 @@ namespace RepositoryLayer.Services
         {
             try
             {
-                Quantity quantity = dBContext.Quantities.Find(Id);
-                return quantity;
+                return dBContext.Quantities.Find(Id);
             }
             catch (Exception e)
             {
@@ -56,15 +55,14 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public IEnumerable<Quantity> DeleteQuntityById(int Id)
+        public Quantity DeleteQuntityById(int Id)
         {
             try
             {
-                List<Quantity> quantity = dBContext.Quantities.ToList();
-
+                Quantity quantity = dBContext.Quantities.FirstOrDefault(value=>value.Id == Id);
                 if (quantity != null)
                 {
-                    dBContext.Remove(dBContext.Quantities.Single(a => a.Id == Id));
+                    dBContext.Quantities.Remove(quantity);
                     dBContext.SaveChanges();
                 }
                 return quantity;
