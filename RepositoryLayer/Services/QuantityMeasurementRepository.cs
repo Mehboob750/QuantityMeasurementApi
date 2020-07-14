@@ -21,8 +21,12 @@ namespace RepositoryLayer.Services
         {
             try
             {
-                dBContext.Quantities.Add(quantity);
-                dBContext.SaveChanges();
+                var result = dBContext.Quantities.FirstOrDefault(value => ((value.MeasurementType == quantity.MeasurementType) && (value.ConversionType == quantity.ConversionType) && (value.Value == quantity.Value)));
+                if (!result.Equals(quantity))
+                {
+                    dBContext.Quantities.Add(quantity);
+                    dBContext.SaveChanges();
+                }
                 return quantity;
             }
             catch (Exception e)

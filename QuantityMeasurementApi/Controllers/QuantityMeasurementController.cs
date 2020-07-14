@@ -21,11 +21,11 @@ namespace QuantityMeasurementApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Convert([FromBody] Quantity quantity)
+        public IActionResult ConvertAndAdd([FromBody] Quantity quantity)
         {
             try
             {
-                var result = quantityMeasurementBusiness.Convert(quantity);
+                var result = quantityMeasurementBusiness.ConvertAndAdd(quantity);
                 if (!result.Result.Equals(0))
                 {
                     bool success = true;

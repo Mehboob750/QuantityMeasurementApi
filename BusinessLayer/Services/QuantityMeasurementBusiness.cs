@@ -15,7 +15,7 @@ namespace BusinessLayer.Services
             this.quantityMeasurementRepository = quantityMeasurementRepository;
         }
 
-        public Quantity Convert(Quantity quantity)
+        public Quantity ConvertAndAdd(Quantity quantity)
         {
             try
             {
