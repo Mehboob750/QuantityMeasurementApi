@@ -13,6 +13,7 @@ namespace CommanLayer
         }
 
         public DbSet<Quantity> Quantities { get; set; }
+        public DbSet<Compare> Comparisons { get; set; }
 
     }
 }

@@ -123,5 +123,32 @@ namespace QuantityMeasurementApi.Controllers
                 return BadRequest(new { success, message = e.Message });
             }
         }
+
+        [HttpPost]
+        [Route("compare")]
+        public IActionResult CompareAndAdd([FromBody] Compare compare)
+        {
+            try
+            {
+                var result = quantityMeasurementBusiness.CompareAndAdd(compare);
+                if (!result.Equals(null))
+                {
+                    bool success = true;
+                    var message = "Data Added Successfully";
+                    return this.Ok(new { success, message, data = result });
+                }
+                else
+                {
+                    bool success = false;
+                    var message = "Failed To Add Data";
+                    return this.NotFound(new { success, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
+            }
+        }
     }
 }

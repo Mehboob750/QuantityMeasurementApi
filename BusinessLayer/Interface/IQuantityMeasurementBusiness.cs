@@ -14,5 +14,8 @@ namespace BusinessLayer.Interface
         Quantity GetQuantityById(int Id);
 
         Quantity DeleteQuntityById(int Id);
+
+        Compare CompareAndAdd(Compare compare);
+
     }
 }

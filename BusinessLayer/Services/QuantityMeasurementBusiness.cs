@@ -70,6 +70,61 @@ namespace BusinessLayer.Services
             }
         }
 
+        public Compare CompareAndAdd(Compare compare)
+        {
+            try
+            {
+                compare.Result = UnitComparision(compare);
+                if (compare.Result != null)
+                {
+                    return quantityMeasurementRepository.AddComparedValue(compare);
+
+                }
+                return compare;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private string UnitComparision(Compare compare)
+        {
+            try
+            {
+                string measurmentType = compare.MeasurementType;
+                string firstValueUnit = compare.FirstValueUnit;
+                double firstValue = compare.FirstValue;
+                string secondValueUnit = compare.SecondValueUnit;
+                double secondValue = compare.SecondValue;
+
+                double firstResult = this.Conversion(measurmentType, firstValueUnit, firstValue);
+                double secondResult = this.Conversion(measurmentType, secondValueUnit, secondValue);
+
+                if (firstResult == secondResult)
+                {
+                    return "Both values are equal";
+                }
+
+                else if (firstResult > secondResult)
+                {
+                    return firstValueUnit + " " + firstValue + " is greater than " + secondValueUnit + " " + secondValue;
+                }
+
+                else if (firstResult < secondResult)
+                {
+                    return firstValueUnit + " " + firstValue + " is less than " + secondValueUnit + " " + secondValue;
+                }
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+
         private double UnitConversion(Quantity quantity)
         {
             try
@@ -98,6 +153,7 @@ namespace BusinessLayer.Services
                     {
                         return length.ConvertLength(unit, value);
                     }
+                    return value;
                 }
                 else if (MeasurementType == "weight")
                 {
@@ -108,6 +164,7 @@ namespace BusinessLayer.Services
                     {
                         return weight.ConvertWeigths(unit, value);
                     }
+                    return value;
                 }
                 else if (MeasurementType == "volume")
                 {
@@ -117,6 +174,7 @@ namespace BusinessLayer.Services
                     {
                         return volume.ConvertValueToLitre(unit, value);
                     }
+                    return value;
                 }
                 else if (MeasurementType == "temperature")
                 {
@@ -126,6 +184,7 @@ namespace BusinessLayer.Services
                     {
                         return temperature.ConvertTemperature(unit, value);
                     }
+                    return value;
                 }
 
                 return 0;

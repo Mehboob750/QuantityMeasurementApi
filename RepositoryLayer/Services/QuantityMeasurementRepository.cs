@@ -21,8 +21,8 @@ namespace RepositoryLayer.Services
         {
             try
             {
-                var result = dBContext.Quantities.FirstOrDefault(value => ((value.MeasurementType == quantity.MeasurementType) && (value.ConversionType == quantity.ConversionType) && (value.Value == quantity.Value)));
-                if (!result.Equals(quantity))
+                Quantity result = dBContext.Quantities.FirstOrDefault(value => ((value.MeasurementType == quantity.MeasurementType) && (value.ConversionType == quantity.ConversionType) && (value.Value == quantity.Value)));
+                if (result!=quantity)
                 {
                     dBContext.Quantities.Add(quantity);
                     dBContext.SaveChanges();
@@ -70,6 +70,21 @@ namespace RepositoryLayer.Services
                     dBContext.SaveChanges();
                 }
                 return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public Compare AddComparedValue(Compare compare)
+        {
+            try
+            {
+                dBContext.Comparisons.Add(compare);
+
+                dBContext.SaveChanges();
+                return compare;
             }
             catch (Exception e)
             {
