@@ -177,5 +177,33 @@ namespace QuantityMeasurementApi.Controllers
                 return BadRequest(new { success, message = e.Message });
             }
         }
+
+        [HttpGet]
+        [Route("compare/{Id}")]
+        public IActionResult GetComparisonById(int Id)
+        {
+            try
+            {
+                var result = quantityMeasurementBusiness.GetComparisonById(Id);
+                if (!result.Equals(null))
+                {
+                    var success = true;
+                    var message = "Data Found Successfully";
+                    return this.Ok(new { success, message, Data = result });
+                }
+                else
+                {
+                    var success = false;
+                    var message = "Data Not Found";
+                    return this.Ok(new { success, message, Data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
+            }
+        }
+
     }
 }

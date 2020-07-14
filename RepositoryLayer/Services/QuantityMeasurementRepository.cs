@@ -103,5 +103,17 @@ namespace RepositoryLayer.Services
                 throw new Exception(e.Message);
             }
         }
+
+        public Compare GetComparisonById(int Id)
+        {
+            try
+            {
+                return dBContext.Comparisons.Find(Id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

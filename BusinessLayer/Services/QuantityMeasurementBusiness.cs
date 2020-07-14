@@ -100,6 +100,18 @@ namespace BusinessLayer.Services
             }
         }
 
+        public Compare GetComparisonById(int Id)
+        {
+            try
+            {
+                return quantityMeasurementRepository.GetComparisonById(Id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         private string UnitComparision(Compare compare)
         {
             try

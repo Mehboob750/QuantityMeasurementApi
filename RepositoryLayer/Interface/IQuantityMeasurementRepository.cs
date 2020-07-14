@@ -18,5 +18,7 @@ namespace RepositoryLayer.Interface
         Compare AddComparedValue(Compare compare);
 
         IEnumerable<Compare> GetAllComparison();
+
+        Compare GetComparisonById(int Id);
     }
 }

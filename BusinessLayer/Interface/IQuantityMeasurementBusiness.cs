@@ -19,5 +19,7 @@ namespace BusinessLayer.Interface
 
         IEnumerable<Compare> GetAllComparison();
 
+        Compare GetComparisonById(int Id);
+
     }
 }
