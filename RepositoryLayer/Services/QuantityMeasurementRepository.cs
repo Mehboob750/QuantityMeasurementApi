@@ -12,6 +12,10 @@ namespace RepositoryLayer.Services
     {
         private ApplicationDbContext dBContext;
 
+        public QuantityMeasurementRepository()
+        {
+        }
+
         public QuantityMeasurementRepository(ApplicationDbContext dBContext)
         {
             this.dBContext = dBContext;

@@ -1,27 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CommanLayer.Model;
+﻿//-----------------------------------------------------------------------
+// <copyright file="IQuantityMeasurementBusiness.cs" company="BridgeLabz Solution">
+//  Copyright (c) BridgeLabz Solution. All rights reserved.
+// </copyright>
+// <author>Mehboob Shaikh</author>
+//-----------------------------------------------------------------------
+[module: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileHeaderFileNameDocumentationMustMatchTypeName", Justification = "Reviewed.")]
 
 namespace BusinessLayer.Interface
 {
+    using System.Collections.Generic;
+    using CommanLayer.Model;
+
+    /// <summary>
+    /// Interface of Quantity Measurement Business Layer
+    /// </summary>
     public interface IQuantityMeasurementBusiness
     {
+        /// <summary>
+        /// It is an interface of Add Quantity Method
+        /// </summary>
+        /// <param name="quantity">It is an object of Quantity Model class</param>
+        /// <returns>It returns Added Record</returns>
         Quantity ConvertAndAdd(Quantity quantity);
 
+        /// <summary>
+        /// It is an interface of Get All Quantity Method
+        /// </summary>
+        /// <returns>It returns All Records</returns>
         IEnumerable<Quantity> GetAllQuantity();
 
+        /// <summary>
+        /// It is an interface of Get Quantity By Id Method
+        /// </summary>
+        /// <param name="Id">It contains Id</param>
+        /// <returns>It returns record of given Id</returns>
         Quantity GetQuantityById(int Id);
 
+        /// <summary>
+        /// It is an interface of Delete Quantity By Id Method
+        /// </summary>
+        /// <param name="Id">It contains Id</param>
+        /// <returns>It returns record of Deleted Id</returns>
         Quantity DeleteQuntityById(int Id);
 
+        /// <summary>
+        /// It is an interface of Compare and Add Method
+        /// </summary>
+        /// <param name="compare">It is an object of Compare Model class</param>
+        /// <returns>It returns Added Record</returns>
         Compare CompareAndAdd(Compare compare);
 
+        /// <summary>
+        /// It is an interface of Get All Comparison Method
+        /// </summary>
+        /// <returns>It returns All Records</returns>
         IEnumerable<Compare> GetAllComparison();
 
+        /// <summary>
+        /// It is an interface of Get Comparison By Id Method
+        /// </summary>
+        /// <param name="Id">It contains Id</param>
+        /// <returns>It returns record of given Id</returns>
         Compare GetComparisonById(int Id);
 
+        /// <summary>
+        /// It is an interface of Delete Comparison By Id Method
+        /// </summary>
+        /// <param name="Id">It contains Id</param>
+        /// <returns>It returns record of Deleted Id</returns>
         Compare DeleteComparisonById(int Id);
-
     }
 }
