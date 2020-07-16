@@ -39,6 +39,11 @@ namespace BusinessLayer.Services
             {
                 return Unit.CentimeterToInch;
             }
+
+            else if (conversionType == "Inch")
+            {
+                return Unit.Inch;
+            }
             return Unit.Null;
         }
 

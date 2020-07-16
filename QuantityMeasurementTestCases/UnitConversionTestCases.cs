@@ -1,18 +1,18 @@
-using System;
-using BusinessLayer.Interface;
-using BusinessLayer.Services;
-using CommanLayer;
-using CommanLayer.Model;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using QuantityMeasurementApi.Controllers;
-using RepositoryLayer.Interface;
-using RepositoryLayer.Services;
-using Xunit;
-
 namespace QuantityMeasurementTestCases
 {
-    public class QuantityMeasurementTestCases
+    using System;
+    using BusinessLayer.Interface;
+    using BusinessLayer.Services;
+    using CommanLayer;
+    using CommanLayer.Model;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using QuantityMeasurementApi.Controllers;
+    using RepositoryLayer.Interface;
+    using RepositoryLayer.Services;
+    using Xunit;
+
+    public class UnitConversionTestCases
     {
         QuantityMeasurementController quantityMeasurementController;
         IQuantityMeasurementBusiness quantityMeasurementBusiness;
@@ -22,12 +22,12 @@ namespace QuantityMeasurementTestCases
 
         public static string sqlConnectionString = "Data Source=DESKTOP-EUJ5D3D;Initial Catalog=QuantityMeasurementDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        static QuantityMeasurementTestCases()
+        static UnitConversionTestCases()
         {
             Quantities = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(sqlConnectionString).Options;
         }
 
-        public QuantityMeasurementTestCases()
+        public UnitConversionTestCases()
         {
             var dbContext = new ApplicationDbContext(Quantities);
             quantityMeasurementRepository = new QuantityMeasurementRepository(dbContext);
@@ -164,7 +164,7 @@ namespace QuantityMeasurementTestCases
                 Quantity result = new Quantity
                 {
                     MeasurementType = "weight",
-                    ConversionType = "Kilograms",
+                    ConversionType = "kilogram",
                     Value = 9
                 };
                 var okResult = quantityMeasurementController.ConvertAndAdd(result);
@@ -261,14 +261,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = null,
                     ConversionType = "GramsToKilogram",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -281,14 +281,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType ="",
                     ConversionType = "",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -301,14 +301,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "length",
                     ConversionType = "GramsToKilogram",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -321,14 +321,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "length",
                     ConversionType = "GallonToLitre",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -341,14 +341,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "length",
                     ConversionType = "FahrenheitToCelsius",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -361,14 +361,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "weight",
                     ConversionType = "FeetToInch",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -382,14 +382,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "weight",
                     ConversionType = "GallonToLitre",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -402,14 +402,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "weight",
                     ConversionType = "FahrenheitToCelsius",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -423,14 +423,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "volume",
                     ConversionType = "FeetToInch",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -443,14 +443,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "volume",
                     ConversionType = "GramsToKilogram",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -463,14 +463,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "volume",
                     ConversionType = "FahrenheitToCelsius",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -483,14 +483,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "temperature",
                     ConversionType = "FeetToInch",
                     Value = 25
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -503,14 +503,14 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "temperature",
                     ConversionType = "GallonToLitre",
                     Value = 50
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
@@ -523,38 +523,20 @@ namespace QuantityMeasurementTestCases
         {
             try
             {
-                Quantity result = new Quantity
+                Quantity quantity = new Quantity
                 {
                     MeasurementType = "temperature",
                     ConversionType = "Kilogram",
                     Value = 5
                 };
-                var badResult = quantityMeasurementController.ConvertAndAdd(result);
-                Assert.IsType<BadRequestObjectResult>(badResult);
+                var result = quantityMeasurementController.ConvertAndAdd(quantity);
+                Assert.IsType<NotFoundObjectResult>(result);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-        /*
-        [Fact]
-        public void GivenController_WhenReadByIdMethodUsed_ReturnsResult()
-        {
-            try
-            {
-                Quantity result = new Quantity
-                {
-                    Id = 1
-                };
-                var okResult = quantityMeasurementController.GetQuantityById(result.Id);
-                Assert.IsType<OkObjectResult>(okResult);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-        */
+        
     }
 }

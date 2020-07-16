@@ -23,7 +23,7 @@ namespace BusinessLayer.Services
                 return Unit.FahrenheitToCelsius;
             }
 
-            return Unit.Fahrenheit;
+            return Unit.Celsius;
         }
 
         public double ConvertTemperature(Unit unit, double value)

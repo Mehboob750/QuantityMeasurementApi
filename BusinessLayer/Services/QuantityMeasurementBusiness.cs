@@ -237,7 +237,7 @@ namespace BusinessLayer.Services
                     Weight weight = new Weight();
                     Weight.Unit unit = weight.SetUnitAndConvertWeights(conversionType);
 
-                    if (unit.Equals(Weight.Unit.GramsToKilogram) || unit.Equals(Weight.Unit.TonneToKilograms))
+                    if (unit.Equals(Weight.Unit.GramsToKilogram) || unit.Equals(Weight.Unit.TonneToKilograms) || unit.Equals(Weight.Unit.kilogram))
                     {
                         return weight.ConvertWeigths(unit, value);
                     }
@@ -246,7 +246,7 @@ namespace BusinessLayer.Services
                 {
                     Volume volume = new Volume();
                     Volume.Unit unit = volume.SetUnitAndConvertVolume(conversionType);
-                    if (unit.Equals(Volume.Unit.GallonToLitre) || unit.Equals(Volume.Unit.MiliLitreToLitre))
+                    if (unit.Equals(Volume.Unit.GallonToLitre) || unit.Equals(Volume.Unit.MiliLitreToLitre) || unit.Equals(Volume.Unit.Litre))
                     {
                         return volume.ConvertValueToLitre(unit, value);
                     }
