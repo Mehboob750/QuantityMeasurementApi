@@ -12,7 +12,7 @@ namespace BusinessLayer.Services
 
         public enum Unit
         {
-            Gallon,
+            Null,
             Litre,
             GallonToLitre,
             MiliLitreToLitre
@@ -25,12 +25,16 @@ namespace BusinessLayer.Services
                 return Unit.GallonToLitre;
             }
 
-            if (conversionType == "MiliLitreToLitre")
+            else if (conversionType == "MiliLitreToLitre")
             {
                 return Unit.MiliLitreToLitre;
             }
 
-            return Unit.Litre;
+            else if (conversionType == "Litre")
+            {
+                return Unit.Litre;
+            }
+            return Unit.Null;
         }
 
         public double ConvertValueToLitre(Unit unit, double value)
@@ -41,12 +45,17 @@ namespace BusinessLayer.Services
                 {
                     return value * this.gallonToLitreValue;
                 }
+
                 else if (unit.Equals(Unit.MiliLitreToLitre))
                 {
                     return value / this.miliLitreToLitreValue;
                 }
 
-                return value;
+                else if (unit.Equals(Unit.Litre))
+                {
+                    return value;
+                }
+                return 0;
             }
             catch (Exception e)
             {

@@ -16,6 +16,7 @@ namespace BusinessLayer.Services
 
         public enum Unit
         {
+            Null,
             Inch,
             FeetToInch,
             YardToInch,
@@ -29,17 +30,16 @@ namespace BusinessLayer.Services
                 return Unit.FeetToInch;
             }
 
-            if (conversionType == "YardToInch")
+            else if (conversionType == "YardToInch")
             {
                 return Unit.YardToInch;
             }
 
-            if (conversionType == "CentimeterToInch")
+            else if (conversionType == "CentimeterToInch")
             {
                 return Unit.CentimeterToInch;
             }
-
-            return Unit.Inch;
+            return Unit.Null;
         }
 
         public double ConvertLength(Unit unit, double length)
@@ -51,17 +51,21 @@ namespace BusinessLayer.Services
                     return length * FeetToInchValue;
                 }
 
-                if (unit.Equals(Unit.YardToInch))
+                else if (unit.Equals(Unit.YardToInch))
                 {
                     return length * YardToInchValue;
                 }
 
-                if (unit.Equals(Unit.CentimeterToInch))
+                else if (unit.Equals(Unit.CentimeterToInch))
                 {
                     return length / CentimeterToInchValue;
                 }
 
-                return length;
+                else if (unit.Equals(Unit.Inch))
+                {
+                    return length;
+                }
+                return 0;
             }
             catch (QuantityMeasurementException e)
             {

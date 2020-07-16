@@ -63,7 +63,7 @@ namespace QuantityMeasurementApi.Controllers
                 {
                     bool success = false;
                     var message = "Unable To Read Data";
-                    return this.NotFound(new { success, message, data = result });
+                    return this.BadRequest(new { success, message, data = result });
                 }
             }
             catch (Exception e)
@@ -89,7 +89,7 @@ namespace QuantityMeasurementApi.Controllers
                 {
                     bool success = false;
                     var message = "Data Not Found";
-                    return this.Ok(new { success, message, Data = result });
+                    return this.BadRequest(new { success, message, Data = result });
                 }
             }
             catch (Exception e)
@@ -115,7 +115,7 @@ namespace QuantityMeasurementApi.Controllers
                 {
                     bool success = false;
                     var message = "Failed To Delete Data";
-                    return this.Ok(new { success, message, data = result });
+                    return this.BadRequest(new { success, message, data = result });
                 }
             }
             catch (Exception e)
@@ -142,7 +142,7 @@ namespace QuantityMeasurementApi.Controllers
                 {
                     bool success = false;
                     var message = "Failed To Add Data";
-                    return this.NotFound(new { success, message, data = result });
+                    return this.BadRequest(new { success, message, data = result });
                 }
             }
             catch (Exception e)
@@ -169,7 +169,7 @@ namespace QuantityMeasurementApi.Controllers
                 {
                     bool success = false;
                     var message = "Unable To Read Data";
-                    return this.NotFound(new { success, message, data = result });
+                    return this.BadRequest(new { success, message, data = result });
                 }
             }
             catch (Exception e)
@@ -196,7 +196,7 @@ namespace QuantityMeasurementApi.Controllers
                 {
                     var success = false;
                     var message = "Data Not Found";
-                    return this.Ok(new { success, message, Data = result });
+                    return this.BadRequest(new { success, message, Data = result });
                 }
             }
             catch (Exception e)

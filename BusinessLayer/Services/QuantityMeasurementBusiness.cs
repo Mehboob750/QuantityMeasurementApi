@@ -1,20 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using BusinessLayer.Interface;
-using CommanLayer.Model;
-using RepositoryLayer.Interface;
+﻿//-----------------------------------------------------------------------
+// <copyright file="IQuantityMeasurementBusiness.cs" company="BridgeLabz Solution">
+//  Copyright (c) BridgeLabz Solution. All rights reserved.
+// </copyright>
+// <author>Mehboob Shaikh</author>
+//-----------------------------------------------------------------------
+[module: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileHeaderFileNameDocumentationMustMatchTypeName", Justification = "Reviewed.")]
 
 namespace BusinessLayer.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using BusinessLayer.Interface;
+    using CommanLayer.Model;
+    using RepositoryLayer.Interface;
+
+    /// <summary>
+    /// This Class is used to implement the methods of interface
+    /// </summary>
     public class QuantityMeasurementBusiness : IQuantityMeasurementBusiness
     {
+        /// <summary>
+        /// Created the Reference of IQuantityMeasurementRepository
+        /// </summary>
         private IQuantityMeasurementRepository quantityMeasurementRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QuantityMeasurementBusiness"/> class.
+        /// </summary>
+        /// <param name="quantityMeasurementRepository">It contains the object IQuantityMeasurementRepository</param>
         public QuantityMeasurementBusiness(IQuantityMeasurementRepository quantityMeasurementRepository)
         {
             this.quantityMeasurementRepository = quantityMeasurementRepository;
         }
 
+        /// <summary>
+        /// This Method is used to Convert and add new Record
+        /// </summary>
+        /// <param name="quantity">It contains the Object of Quantity Model</param>
+        /// <returns>It returns Added Record</returns>
         public Quantity ConvertAndAdd(Quantity quantity)
         {
             try
@@ -34,6 +57,10 @@ namespace BusinessLayer.Services
 
         }
 
+        /// <summary>
+        /// This Method is used to Read All Records
+        /// </summary>
+        /// <returns>It returns All Records</returns>
         public IEnumerable<Quantity> GetAllQuantity()
         {
             try
@@ -46,6 +73,11 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// This Method is used to Get Quantity Record By Id
+        /// </summary>
+        /// <param name="Id">It contains Id</param>
+        /// <returns>It returns record of given Id</returns>
         public Quantity GetQuantityById(int Id)
         {
             try
@@ -58,6 +90,11 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// This Method is used to Delete Quantity Record By Id
+        /// </summary>
+        /// <param name="Id">It contains Id</param>
+        /// <returns>It returns the Deleted Record</returns>
         public Quantity DeleteQuntityById(int Id)
         {
             try
@@ -70,6 +107,11 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// This Method is used to Compare and Add
+        /// </summary>
+        /// <param name="compare">It contains the Object of Compare Model</param>
+        /// <returns>It returns Added Record</returns>
         public Compare CompareAndAdd(Compare compare)
         {
             try
@@ -185,11 +227,10 @@ namespace BusinessLayer.Services
                     Length length = new Length();
                     Length.Unit unit = length.SetUnitAndConvertLength(conversionType);
 
-                    if (unit == Length.Unit.FeetToInch || unit == Length.Unit.YardToInch || unit == Length.Unit.CentimeterToInch)
+                    if (unit == Length.Unit.FeetToInch || unit == Length.Unit.YardToInch || unit == Length.Unit.CentimeterToInch || unit == Length.Unit.Inch)
                     {
                         return length.ConvertLength(unit, value);
                     }
-                    return value;
                 }
                 else if (MeasurementType == "weight")
                 {
@@ -200,7 +241,6 @@ namespace BusinessLayer.Services
                     {
                         return weight.ConvertWeigths(unit, value);
                     }
-                    return value;
                 }
                 else if (MeasurementType == "volume")
                 {
@@ -210,7 +250,6 @@ namespace BusinessLayer.Services
                     {
                         return volume.ConvertValueToLitre(unit, value);
                     }
-                    return value;
                 }
                 else if (MeasurementType == "temperature")
                 {
@@ -220,7 +259,6 @@ namespace BusinessLayer.Services
                     {
                         return temperature.ConvertTemperature(unit, value);
                     }
-                    return value;
                 }
 
                 return 0;
@@ -231,8 +269,6 @@ namespace BusinessLayer.Services
             }
 
         }
-
-  
 
     }
 }
