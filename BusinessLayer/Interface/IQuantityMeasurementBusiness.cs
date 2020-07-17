@@ -32,16 +32,16 @@ namespace BusinessLayer.Interface
         /// <summary>
         /// It is an interface of Get Quantity By Id Method
         /// </summary>
-        /// <param name="Id">It contains Id</param>
+        /// <param name="id">It contains Id</param>
         /// <returns>It returns record of given Id</returns>
-        Quantity GetQuantityById(int Id);
+        Quantity GetQuantityById(int id);
 
         /// <summary>
         /// It is an interface of Delete Quantity By Id Method
         /// </summary>
-        /// <param name="Id">It contains Id</param>
+        /// <param name="id">It contains Id</param>
         /// <returns>It returns record of Deleted Id</returns>
-        Quantity DeleteQuntityById(int Id);
+        Quantity DeleteQuntityById(int id);
 
         /// <summary>
         /// It is an interface of Compare and Add Method
@@ -59,15 +59,15 @@ namespace BusinessLayer.Interface
         /// <summary>
         /// It is an interface of Get Comparison By Id Method
         /// </summary>
-        /// <param name="Id">It contains Id</param>
+        /// <param name="id">It contains Id</param>
         /// <returns>It returns record of given Id</returns>
-        Compare GetComparisonById(int Id);
+        Compare GetComparisonById(int id);
 
         /// <summary>
         /// It is an interface of Delete Comparison By Id Method
         /// </summary>
-        /// <param name="Id">It contains Id</param>
+        /// <param name="id">It contains Id</param>
         /// <returns>It returns record of Deleted Id</returns>
-        Compare DeleteComparisonById(int Id);
+        Compare DeleteComparisonById(int id);
     }
 }

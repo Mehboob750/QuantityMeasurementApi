@@ -1,32 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLayer.Interface;
-using CommanLayer.Model;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿//-----------------------------------------------------------------------
+// <copyright file="QuantityMeasurementController.cs" company="BridgeLabz Solution">
+//  Copyright (c) BridgeLabz Solution. All rights reserved.
+// </copyright>
+// <author>Mehboob Shaikh</author>
+//-----------------------------------------------------------------------
+[module: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileHeaderFileNameDocumentationMustMatchTypeName", Justification = "Reviewed.")]
 
 namespace QuantityMeasurementApi.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using BusinessLayer.Interface;
+    using CommanLayer.Model;
+    using Microsoft.AspNetCore.Mvc;
+
+    /// <summary>
+    /// Quantity Measurement controller class
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class QuantityMeasurementController : ControllerBase
     {
+        /// <summary>
+        /// It is an Reference of IQuantityMeasurement Business
+        /// </summary>
         private IQuantityMeasurementBusiness quantityMeasurementBusiness;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QuantityMeasurementController"/> class.
+        /// </summary>
+        /// <param name="quantityMeasurementBusiness">It is an object of IQuantityMeasurement Business</param>
         public QuantityMeasurementController(IQuantityMeasurementBusiness quantityMeasurementBusiness)
         {
             this.quantityMeasurementBusiness = quantityMeasurementBusiness;
         }
 
+        /// <summary>
+        /// This Method is used to Add the new record
+        /// </summary>
+        /// <param name="quantity">It is an object of Quantity Model class</param>
+        /// <returns>Returns the result in SMD format</returns>
         [HttpPost]
         public IActionResult ConvertAndAdd([FromBody] Quantity quantity)
         {
             try
             {
-                var result = quantityMeasurementBusiness.ConvertAndAdd(quantity);
+                var result = this.quantityMeasurementBusiness.ConvertAndAdd(quantity);
                 if (!result.Result.Equals(0))
                 {
                     bool success = true;
@@ -43,16 +62,20 @@ namespace QuantityMeasurementApi.Controllers
             catch (Exception e)
             {
                 bool success = false;
-                return BadRequest(new { success, message = e.Message });
+                return this.BadRequest(new { success, message = e.Message });
             }
         }
 
+        /// <summary>
+        /// This Method is used to Read all the records
+        /// </summary>
+        /// <returns>Returns the result in SMD format</returns>
         [HttpGet]
         public ActionResult<IEnumerable<Quantity>> GetAllQuantity()
         {
             try
             {
-                var result = quantityMeasurementBusiness.GetAllQuantity();
+                var result = this.quantityMeasurementBusiness.GetAllQuantity();
                 if (!result.Equals(null))
                 {
                     bool success = true;
@@ -69,16 +92,21 @@ namespace QuantityMeasurementApi.Controllers
             catch (Exception e)
             {
                 bool success = false;
-                return BadRequest(new { success, message = e.Message });
+                return this.BadRequest(new { success, message = e.Message });
             }
         }
 
+        /// <summary>
+        /// This Method is used to Read record by Id
+        /// </summary>
+        /// <param name="Id">It Contains the Id</param>
+        /// <returns>Returns the result in SMD format</returns>
         [HttpGet("{Id}")]
         public IActionResult GetQuantityById(int Id)
         {
             try
             {
-                var result = quantityMeasurementBusiness.GetQuantityById(Id);
+                var result = this.quantityMeasurementBusiness.GetQuantityById(Id);
                 if (result.Equals(null))
                 {
                     bool success = true;
@@ -95,16 +123,21 @@ namespace QuantityMeasurementApi.Controllers
             catch (Exception e)
             {
                 bool success = false;
-                return BadRequest(new { success, message = e.Message });
+                return this.BadRequest(new { success, message = e.Message });
             }
         }
 
+        /// <summary>
+        /// This Method is used to Delete record by Id
+        /// </summary>
+        /// <param name="Id">It Contains the Id</param>
+        /// <returns>Returns the result in SMD format</returns>
         [HttpDelete("{Id}")]
         public IActionResult DeleteQuntityById(int Id)
         {
             try
             {
-                var result = quantityMeasurementBusiness.DeleteQuntityById(Id);
+                var result = this.quantityMeasurementBusiness.DeleteQuntityById(Id);
                 if (!result.Equals(null))
                 {
                     bool success = true;
@@ -121,17 +154,22 @@ namespace QuantityMeasurementApi.Controllers
             catch (Exception e)
             {
                 bool success = false;
-                return BadRequest(new { success, message = e.Message });
+                return this.BadRequest(new { success, message = e.Message });
             }
         }
 
+        /// <summary>
+        /// This Method is used to Add the new record
+        /// </summary>
+        /// <param name="compare">It is an object of Quantity Model class</param>
+        /// <returns>Returns the result in SMD format</returns>
         [HttpPost]
         [Route("compare")]
         public IActionResult CompareAndAdd([FromBody] Compare compare)
         {
             try
             {
-                var result = quantityMeasurementBusiness.CompareAndAdd(compare);
+                var result = this.quantityMeasurementBusiness.CompareAndAdd(compare);
                 if (!result.Equals(null))
                 {
                     bool success = true;
@@ -148,17 +186,21 @@ namespace QuantityMeasurementApi.Controllers
             catch (Exception e)
             {
                 bool success = false;
-                return BadRequest(new { success, message = e.Message });
+                return this.BadRequest(new { success, message = e.Message });
             }
         }
 
+        /// <summary>
+        /// This Method is used to Read all the records
+        /// </summary>
+        /// <returns>Returns the result in SMD format</returns>
         [HttpGet]
         [Route("compare")]
         public ActionResult<IEnumerable<Quantity>> GetAllComparison()
         {
             try
             {
-                var result = quantityMeasurementBusiness.GetAllComparison();
+                var result = this.quantityMeasurementBusiness.GetAllComparison();
                 if (!result.Equals(null))
                 {
                     bool success = true;
@@ -175,17 +217,22 @@ namespace QuantityMeasurementApi.Controllers
             catch (Exception e)
             {
                 bool success = false;
-                return BadRequest(new { success, message = e.Message });
+                return this.BadRequest(new { success, message = e.Message });
             }
         }
 
+        /// <summary>
+        /// This Method is used to Read record by Id
+        /// </summary>
+        /// <param name="Id">It Contains the Id</param>
+        /// <returns>Returns the result in SMD format</returns>
         [HttpGet]
         [Route("compare/{Id}")]
         public IActionResult GetComparisonById(int Id)
         {
             try
             {
-                var result = quantityMeasurementBusiness.GetComparisonById(Id);
+                var result = this.quantityMeasurementBusiness.GetComparisonById(Id);
                 if (!result.Equals(null))
                 {
                     var success = true;
@@ -202,17 +249,22 @@ namespace QuantityMeasurementApi.Controllers
             catch (Exception e)
             {
                 bool success = false;
-                return BadRequest(new { success, message = e.Message });
+                return this.BadRequest(new { success, message = e.Message });
             }
         }
 
+        /// <summary>
+        /// This Method is used to Delete record by Id
+        /// </summary>
+        /// <param name="Id">It Contains the Id</param>
+        /// <returns>Returns the result in SMD format</returns>
         [HttpDelete]
         [Route("compare/{Id}")]
         public IActionResult DeleteComparisonById(int Id)
         {
             try
             {
-                var result = quantityMeasurementBusiness.DeleteComparisonById(Id);
+                var result = this.quantityMeasurementBusiness.DeleteComparisonById(Id);
                 if (!result.Equals(null))
                 {
                     bool success = true;
@@ -229,9 +281,8 @@ namespace QuantityMeasurementApi.Controllers
             catch (Exception e)
             {
                 bool success = false;
-                return BadRequest(new { success, message = e.Message });
+                return this.BadRequest(new { success, message = e.Message });
             }
         }
-
     }
 }

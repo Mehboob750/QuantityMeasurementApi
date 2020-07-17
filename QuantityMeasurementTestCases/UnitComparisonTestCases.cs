@@ -408,5 +408,19 @@
                 throw new Exception(e.Message);
             }
         }
+
+        [Fact]
+        public void Given_WhenRead_ReturnsResult()
+        {
+            try
+            {
+                var result = quantityMeasurementController.GetAllComparison();
+                Assert.IsType<OkObjectResult>(result);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

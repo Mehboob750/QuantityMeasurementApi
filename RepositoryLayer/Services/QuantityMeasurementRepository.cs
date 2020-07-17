@@ -1,40 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CommanLayer;
-using CommanLayer.Model;
-using RepositoryLayer.Interface;
+﻿//-----------------------------------------------------------------------
+// <copyright file="QuantityMeasurementRepository.cs" company="BridgeLabz Solution">
+//  Copyright (c) BridgeLabz Solution. All rights reserved.
+// </copyright>
+// <author>Mehboob Shaikh</author>
+//-----------------------------------------------------------------------
+[module: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileHeaderFileNameDocumentationMustMatchTypeName", Justification = "Reviewed.")]
 
 namespace RepositoryLayer.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using CommanLayer;
+    using CommanLayer.Model;
+    using RepositoryLayer.Interface;
+
+    /// <summary>
+    /// This Class is used to implement the methods of interface
+    /// </summary>
     public class QuantityMeasurementRepository : IQuantityMeasurementRepository
     {
-        private ApplicationDbContext dBContext;
+        /// <summary>
+        /// Created the Reference of ApplicationdbContext
+        /// </summary>
+        private ApplicationDbContext dbContext;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QuantityMeasurementRepository"/> class.
+        /// </summary>
         public QuantityMeasurementRepository()
         {
         }
 
-        public QuantityMeasurementRepository(ApplicationDbContext dBContext)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QuantityMeasurementRepository"/> class.
+        /// </summary>
+        /// <param name="dbContext">It contains the object ApplicationDbContext</param>
+        public QuantityMeasurementRepository(ApplicationDbContext dbContext)
         {
-            this.dBContext = dBContext;
+            this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// This Method is used to add new Record
+        /// </summary>
+        /// <param name="quantity">It contains the Object of Quantity Model</param>
+        /// <returns>It returns Added Record</returns>
         public Quantity Add(Quantity quantity)
         {
             try
             {
-                var result = dBContext.Quantities.FirstOrDefault(value =>((value.ConversionType == quantity.ConversionType) && (value.Value == quantity.Value)));
-                if (result==null)
+                var result = this.dbContext.Quantities.FirstOrDefault(value => ((value.ConversionType == quantity.ConversionType) && (value.Value == quantity.Value)));
+                if (result == null)
                 {
-                    dBContext.Quantities.Add(quantity);
-                    dBContext.SaveChanges();
+                    this.dbContext.Quantities.Add(quantity);
+                    this.dbContext.SaveChanges();
                 }
                 else
                 {
                     return null;
                 }
+
                 return quantity;
             }
             catch (Exception e)
@@ -43,11 +69,15 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// This Method is used to Read All Records
+        /// </summary>
+        /// <returns>It returns All Records</returns>
         public IEnumerable<Quantity> GetAllQuantity()
         {
             try
             {
-                return dBContext.Quantities;
+                return this.dbContext.Quantities;
             }
             catch (Exception e)
             {
@@ -55,11 +85,16 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public Quantity GetQuantityById(int Id)
+        /// <summary>
+        /// This Method is used to Get Quantity Record By Id
+        /// </summary>
+        /// <param name="id">It contains Id</param>
+        /// <returns>It returns record of given Id</returns>
+        public Quantity GetQuantityById(int id)
         {
             try
             {
-                return dBContext.Quantities.Find(Id);
+                return this.dbContext.Quantities.Find(id);
             }
             catch (Exception e)
             {
@@ -67,16 +102,22 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public Quantity DeleteQuntityById(int Id)
+        /// <summary>
+        /// This Method is used to Delete Quantity Record By Id
+        /// </summary>
+        /// <param name="id">It contains Id</param>
+        /// <returns>It returns the Deleted Record</returns>
+        public Quantity DeleteQuntityById(int id)
         {
             try
             {
-                Quantity quantity = dBContext.Quantities.FirstOrDefault(value=>value.Id == Id);
+                Quantity quantity = this.dbContext.Quantities.FirstOrDefault(value => value.Id == id);
                 if (quantity != null)
                 {
-                    dBContext.Quantities.Remove(quantity);
-                    dBContext.SaveChanges();
+                    this.dbContext.Quantities.Remove(quantity);
+                    this.dbContext.SaveChanges();
                 }
+
                 return quantity;
             }
             catch (Exception e)
@@ -85,12 +126,17 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// This Method is used to Compare and Add
+        /// </summary>
+        /// <param name="compare">It contains the Object of Compare Model</param>
+        /// <returns>It returns Added Record</returns>
         public Compare AddComparedValue(Compare compare)
         {
             try
             {
-                dBContext.Comparisons.Add(compare);
-                dBContext.SaveChanges();
+                this.dbContext.Comparisons.Add(compare);
+                this.dbContext.SaveChanges();
                 return compare;
             }
             catch (Exception e)
@@ -99,11 +145,15 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// This Method is used to Read All Records Of Comparisons
+        /// </summary>
+        /// <returns>It returns All Records</returns>
         public IEnumerable<Compare> GetAllComparison()
         {
             try
             {
-                return dBContext.Comparisons;
+                return this.dbContext.Comparisons;
             }
             catch (Exception e)
             {
@@ -111,11 +161,16 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public Compare GetComparisonById(int Id)
+        /// <summary>
+        /// This Method is used to Get Comparison Record By Id
+        /// </summary>
+        /// <param name="id">It contains Id</param>
+        /// <returns>It returns record of given Id</returns>
+        public Compare GetComparisonById(int id)
         {
             try
             {
-                return dBContext.Comparisons.Find(Id);
+                return this.dbContext.Comparisons.Find(id);
             }
             catch (Exception e)
             {
@@ -123,16 +178,22 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public Compare DeleteComparisonById(int Id)
+        /// <summary>
+        /// This Method is used to Delete Comparison Record By Id
+        /// </summary>
+        /// <param name="id">It contains Id</param>
+        /// <returns>It returns the Deleted Record</returns>
+        public Compare DeleteComparisonById(int id)
         {
             try
             {
-                Compare compare = dBContext.Comparisons.FirstOrDefault(value => value.Id == Id);
+                Compare compare = this.dbContext.Comparisons.FirstOrDefault(value => value.Id == id);
                 if (compare != null)
                 {
-                    dBContext.Comparisons.Remove(compare);
-                    dBContext.SaveChanges();
+                    this.dbContext.Comparisons.Remove(compare);
+                    this.dbContext.SaveChanges();
                 }
+
                 return compare;
             }
             catch (Exception e)
@@ -140,6 +201,5 @@ namespace RepositoryLayer.Services
                 throw new Exception(e.Message);
             }
         }
-
     }
 }
