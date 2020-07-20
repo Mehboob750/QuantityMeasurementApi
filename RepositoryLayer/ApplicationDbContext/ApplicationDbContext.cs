@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------
 [module: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileHeaderFileNameDocumentationMustMatchTypeName", Justification = "Reviewed.")]
 
-namespace CommanLayer
+namespace RepositoryLayer
 {
     using CommanLayer.Model;
     using Microsoft.EntityFrameworkCore;

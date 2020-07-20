@@ -71,7 +71,7 @@ namespace QuantityMeasurementApi.Controllers
         /// </summary>
         /// <returns>Returns the result in SMD format</returns>
         [HttpGet]
-        public ActionResult<IEnumerable<Quantity>> GetAllQuantity()
+        public IActionResult GetAllQuantity()
         {
             try
             {
@@ -107,7 +107,7 @@ namespace QuantityMeasurementApi.Controllers
             try
             {
                 var result = this.quantityMeasurementBusiness.GetQuantityById(Id);
-                if (result.Equals(null))
+                if (!result.Equals(null))
                 {
                     bool success = true;
                     var message = "Data Found Successfully";
@@ -157,7 +157,7 @@ namespace QuantityMeasurementApi.Controllers
                 return this.BadRequest(new { success, message = e.Message });
             }
         }
-
+        
         /// <summary>
         /// This Method is used to Add the new record
         /// </summary>
@@ -196,7 +196,7 @@ namespace QuantityMeasurementApi.Controllers
         /// <returns>Returns the result in SMD format</returns>
         [HttpGet]
         [Route("compare")]
-        public ActionResult<IEnumerable<Quantity>> GetAllComparison()
+        public IActionResult GetAllComparison()
         {
             try
             {

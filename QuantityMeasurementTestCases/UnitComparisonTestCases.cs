@@ -1,4 +1,12 @@
-﻿namespace QuantityMeasurementTestCases
+﻿//-----------------------------------------------------------------------
+// <copyright file="UnitComparisonTestCases.cs" company="BridgeLabz Solution">
+//  Copyright (c) BridgeLabz Solution. All rights reserved.
+// </copyright>
+// <author>Mehboob Shaikh</author>
+//-----------------------------------------------------------------------
+[module: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileHeaderFileNameDocumentationMustMatchTypeName", Justification = "Reviewed.")]
+
+namespace QuantityMeasurementTestCases
 {
     using System;
     using BusinessLayer.Interface;
@@ -8,25 +16,49 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using QuantityMeasurementApi.Controllers;
+    using RepositoryLayer;
     using RepositoryLayer.Interface;
     using RepositoryLayer.Services;
     using Xunit;
 
+    /// <summary>
+    /// This class contains the testcases of unit Comparison
+    /// </summary>
     public class UnitComparisonTestCases
     {
+        /// <summary>
+        /// Created Reference of QuantityMeasurementController
+        /// </summary>
         QuantityMeasurementController quantityMeasurementController;
+
+        /// <summary>
+        /// Created Reference of IQuantityMeasurementBusiness
+        /// </summary>
         IQuantityMeasurementBusiness quantityMeasurementBusiness;
+
+        /// <summary>
+        /// Created Reference of IQuantityMeasurementRepository
+        /// </summary>
         IQuantityMeasurementRepository quantityMeasurementRepository;
 
         public static DbContextOptions<ApplicationDbContext> Comparisons { get; }
 
+        /// <summary>
+        /// Connection String to connect to Database
+        /// </summary>
         public static string sqlConnectionString = "Data Source=DESKTOP-EUJ5D3D;Initial Catalog=QuantityMeasurementDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
+        /// <summary>
+        /// static Method used to create object of Db context
+        /// </summary>
         static UnitComparisonTestCases()
         {
             Comparisons = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(sqlConnectionString).Options;
         }
 
+        /// <summary>
+        /// Default constructor used to create new objects
+        /// </summary>
         public UnitComparisonTestCases()
         {
             var dbContext = new ApplicationDbContext(Comparisons);
@@ -35,6 +67,9 @@
             quantityMeasurementController = new QuantityMeasurementController(quantityMeasurementBusiness);
         }
 
+        /// <summary>
+        /// Given 2 FeetToInch And 24 Inch Comapare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given2FeetToInchAnd24Inch_WhenCompared_ReturnsResult()
         {
@@ -57,6 +92,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 1 YardToInch And 2 FeetToInch compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given1YardToInchAnd2FeetToInch_WhenCompared_ReturnsResult()
         {
@@ -79,6 +117,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 1 YardToInch And 36 Inch Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given1YardToInchAnd36Inch_WhenCompared_ReturnsResult()
         {
@@ -101,6 +142,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 14 Inch And 2 FeetToInch Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given14InchAnd2FeetToInch_WhenCompared_ReturnsResult()
         {
@@ -123,6 +167,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 5 CentimeterToInch And 2 Inch Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given5CentimeterToInchValueAnd2InchValue_WhenCompared_ReturnsResult()
         {
@@ -145,6 +192,9 @@
             }
         }
 
+        /// <summary>
+        /// Given Null And 2 Inch Compare returns badrequestobject
+        /// </summary>
         [Fact]
         public void GivenNullAnd2InchValue_WhenCompared_ReturnsBadResult()
         {
@@ -167,6 +217,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 1 GallonToLitre And 3.78 Litre compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given1GallonToLitreValueAnd3point78LitreValue_WhenCompared_ReturnsResult()
         {
@@ -189,6 +242,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 100 MiliLitreToLitre And 10 Litre Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given100MiliLitreToLitreValueAnd10LitreValue_WhenCompared_ReturnsResult()
         {
@@ -211,6 +267,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 10 Litre And 10 Litre Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given10LitreValueAnd10LitreValue_WhenCompared_ReturnsResult()
         {
@@ -233,6 +292,9 @@
             }
         }
 
+        /// <summary>
+        /// Given Null And 3.78 Litre compare returns bad request object
+        /// </summary>
         [Fact]
         public void GivenNullValueAnd3point78LitreValue_WhenCompared_ReturnsBadResult()
         {
@@ -255,6 +317,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 1000 GramsToKilogram And 1 KiloGram Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given1000GramsToKilogramValueAnd1KiloGram_WhenCompared_ReturnsResult()
         {
@@ -277,6 +342,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 1 TonneToKilograms And 100 KiloGram Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given1TonneToKilogramsValueAnd100KiloGram_WhenCompared_ReturnsResult()
         {
@@ -299,6 +367,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 10 kilogram And 10 KiloGram Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given10kilogramValueAnd10KiloGram_WhenCompared_ReturnsResult()
         {
@@ -321,6 +392,9 @@
             }
         }
 
+        /// <summary>
+        /// Given Null And 10 KiloGram Compare returns badrequestobject
+        /// </summary>
         [Fact]
         public void GivenNullAnd10KiloGram_WhenCompared_ReturnsResult()
         {
@@ -343,6 +417,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 22 FahrenheitToCelsius And 10 Celsius Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given22FahrenheitToCelsiusAnd10Celsius_WhenCompared_ReturnsResult()
         {
@@ -365,6 +442,9 @@
             }
         }
 
+        /// <summary>
+        /// Given 150 Celsius And 150 Celsius Compare returns okObjectResult
+        /// </summary>
         [Fact]
         public void Given150CelsiusAnd150Celsius_WhenCompared_ReturnsResult()
         {
@@ -387,6 +467,9 @@
             }
         }
 
+        /// <summary>
+        /// Given Null And 150 Celsius Compare returns badrequestobject
+        /// </summary>
         [Fact]
         public void GivenNullAnd150Celsius_WhenCompared_ReturnsResult()
         {
@@ -409,12 +492,51 @@
             }
         }
 
+        /// <summary>
+        /// This Method is used to get all records returns okObjectResult
+        /// </summary>
         [Fact]
-        public void Given_WhenRead_ReturnsResult()
+        public void GivenController_WhenGetAllMethodUsed_ReturnsResult()
         {
             try
             {
                 var result = quantityMeasurementController.GetAllComparison();
+                Assert.IsType<OkObjectResult>(result);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Given Id When GetById Method used returns okObjectResult 
+        /// </summary>
+        [Fact]
+        public void GivenId_WhenGetByIdMethodUsed_ReturnsResult()
+        {
+            try
+            {
+                int id = 13;
+                var result = quantityMeasurementController.GetComparisonById(id);
+                Assert.IsType<OkObjectResult>(result);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Given Id When DeleteById Method used returns okObjectResult 
+        /// </summary>
+        [Fact]
+        public void GivenId_WhenDeleteByIdMethodUsed_ReturnsResult()
+        {
+            try
+            {
+                int id = 11;
+                var result = quantityMeasurementController.DeleteComparisonById(id);
                 Assert.IsType<OkObjectResult>(result);
             }
             catch (Exception e)

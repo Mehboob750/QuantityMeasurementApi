@@ -107,7 +107,7 @@ namespace BusinessLayer.Services
                 throw new Exception(e.Message);
             }
         }
-
+        
         /// <summary>
         /// This Method is used to Compare and Add
         /// </summary>
@@ -180,7 +180,7 @@ namespace BusinessLayer.Services
                 throw new Exception(e.Message);
             }
         }
-
+        
         /// <summary>
         /// This Method is Used To Compare the two values of different Unit
         /// </summary>

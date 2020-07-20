@@ -17,6 +17,7 @@ namespace QuantityMeasurementApi
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using RepositoryLayer;
     using RepositoryLayer.Interface;
     using RepositoryLayer.Services;
     using Swashbuckle.AspNetCore.Swagger;
